@@ -1,6 +1,15 @@
-FROM ubuntu:24.04
 
-RUN <<EOF
-apt-get update
-apt-get install -y nginx
-EOF
+# 使用したいイメージのベース。Ubuntu,Node.js,Rubyとか
+FROM alpine:latest
+
+# インストールしたいやつ入れる。
+RUN apk --no-cache add ca-certificates
+
+#
+WORKDIR /app
+
+# バイナリファイルだけコピー
+COPY ./test .
+
+# バイナリを実行
+CMD ["./test"]
